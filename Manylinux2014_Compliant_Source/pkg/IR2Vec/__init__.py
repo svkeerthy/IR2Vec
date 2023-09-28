@@ -9,10 +9,32 @@ from . import preparation
 from IR2Vec.core import *
 
 import pathlib as pl
-import re
+import re, os
 
 version_regex = re.compile(r"^project\(ir2vec VERSION (?P<version>[^)]+)\)$")
 VERSION = ""
+
+path = pl.Path(__file__).resolve().parents[4]
+dir_list = os.listdir(path)
+print("1.. Files and directories in '", path, "' :")
+# prints all files
+print(dir_list)
+print("+++++++++++++++++++++++++++++++++++++")
+
+path = pl.Path(__file__).resolve().parents[4] / "project"
+dir_list = os.listdir(path)
+print("2.. Files and directories in '", path, "' :")
+# prints all files
+print(dir_list)
+print("----------------------------------------")
+
+path = pl.Path(__file__).resolve().parents[4] / "project" / "src
+dir_list = os.listdir(path)
+print("2.. Files and directories in '", path, "' :")
+# prints all files
+print(dir_list)
+print("*******************************************")
+
 with (pl.Path(__file__).resolve().parents[4] / "project" / "src" / "CMakeLists.txt").open() as f:
     for line in f:
         if not VERSION:
