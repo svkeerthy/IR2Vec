@@ -28,7 +28,7 @@ print("2.. Files and directories in '", path, "' :")
 print(dir_list)
 print("----------------------------------------")
 
-path = pl.Path(__file__).resolve().parents[4] / "project" / "src
+path = pl.Path(__file__).resolve().parents[4] / "project" / "src"
 dir_list = os.listdir(path)
 print("2.. Files and directories in '", path, "' :")
 # prints all files
