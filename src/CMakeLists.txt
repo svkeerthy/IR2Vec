@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-
-file(STRINGS "version.txt" PROJECT_VERSION_FILE_CONTENT)
-string(STRIP "${PROJECT_VERSION_FILE_CONTENT}" PROJECT_VERSION)
-
-project(ir2vec VERSION ${PROJECT_VERSION})
+project(ir2vec VERSION 2.0.0)
 
 set(IR2VEC_LIB "IR2Vec")
 set(IR2VEC_LIB_STATIC "IR2Vec_Static")

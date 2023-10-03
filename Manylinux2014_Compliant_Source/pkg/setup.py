@@ -9,32 +9,28 @@ import subprocess as sp
 import pathlib as pl
 import re
 
-# version_regex = re.compile(r"^project\(ir2vec VERSION (?P<version>[^)]+)\)$")
+version_regex = re.compile(r"^project\(ir2vec VERSION (?P<version>[^)]+)\)$")
 llvm_libs_regex = re.compile(
     r"^llvm_map_components_to_libnames\(llvm_libs (?P<libs>[^)]+)\)$"
 )
 
 LLVM_LIBS = []
-
-VERSION = ""
-with (pl.Path(__file__).resolve().parents[2] / "src" / "version.txt").open() as f:
-    VERSION = f.read().strip()
-    
+VERSION = ""  
 DESCRIPTION = ""
 
 with (pl.Path(__file__).resolve().parents[2] / "src" / "CMakeLists.txt").open() as f:
     for line in f:
-        # if not VERSION:
-        #     vmatch = version_regex.match(line)  # Not using walrus because Python3.6
-        #     if vmatch:
-        #         VERSION = vmatch.group("version")
-        #         continue
+        if not VERSION:
+            vmatch = version_regex.match(line)  # Not using walrus because Python3.6
+            if vmatch:
+                VERSION = vmatch.group("version")
+                continue
         if not LLVM_LIBS:
             libmatch = llvm_libs_regex.match(line)
             if libmatch:
                 LLVM_LIBS = libmatch.group("libs").split()
                 continue
-        else:
+        if VERSION and LLVM_LIBS:
             break
 
 with (pl.Path(__file__).parent / "IR2Vec" / "README.md").open() as f:
