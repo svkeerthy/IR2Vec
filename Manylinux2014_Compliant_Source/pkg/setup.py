@@ -17,7 +17,7 @@ llvm_libs_regex = re.compile(
 LLVM_LIBS = []
 
 VERSION = ""
-with (pl.Path(__file__).resolve().parents[2] / "src" / "CMakeLists.txt").open() as f:
+with (pl.Path(__file__).resolve().parents[2] / "src" / "version.txt").open() as f:
     VERSION = f.read().strip()
     
 DESCRIPTION = ""
