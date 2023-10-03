@@ -9,62 +9,17 @@ from . import preparation
 from IR2Vec.core import *
 
 import pathlib as pl
-import re, os
+import os, io
 
-version_regex = re.compile(r"^project\(ir2vec VERSION (?P<version>[^)]+)\)$")
+# version_regex = re.compile(r"^project\(ir2vec VERSION (?P<version>[^)]+)\)$")
 VERSION = ""
-
-path = pl.Path(__file__).resolve().parents[1]
-dir_list = os.listdir(path)
-print("1.. Files and directories in '", path, "' :")
-# prints all files
-print(dir_list)
-print("+++++++++++++++++++++++++++++++++++++")
-
-path = pl.Path(__file__).resolve().parents[2]
-dir_list = os.listdir(path)
-print("1.. Files and directories in '", path, "' :")
-# prints all files
-print(dir_list)
-print("+++++++++++++++++++++++++++++++++++++")
-
-path = pl.Path(__file__).resolve().parents[3]
-dir_list = os.listdir(path)
-print("1.. Files and directories in '", path, "' :")
-# prints all files
-print(dir_list)
-print("+++++++++++++++++++++++++++++++++++++")
-
-directory = os.getcwd()
-
-print(directory)
-print("=====================================")
-
-path = pl.Path(__file__).resolve().parents[3] / "project"
-dir_list = os.listdir(path)
-print("2.. Files and directories in '", path, "' :")
-# prints all files
-print(dir_list)
-print("----------------------------------------")
-
-path = pl.Path(__file__).resolve().parents[3] / "project" / "src"
-dir_list = os.listdir(path)
-print("2.. Files and directories in '", path, "' :")
-# prints all files
-print(dir_list)
-print("*******************************************")
-
-with (pl.Path(__file__).resolve().parents[3] / "project" / "src" / "CMakeLists.txt").open() as f:
-    for line in f:
-        if not VERSION:
-            vmatch = version_regex.match(line)  # Not using walrus because Python3.6
-            if vmatch:
-                VERSION = vmatch.group("version")
-                continue
-        break
+with io.open("version.txt", encoding="utf-8") as f:
+    VERSION = f.read().strip()
 
 __version__ = VERSION
 __copyright__ = "Copyright The Contributors of IR2Vec"
 __license__ = "BSD 4-Clause License"
+
+print("__version__: ", __version__)
 
 setSeedEmbdPath(preparation.install_loc_pkg)
