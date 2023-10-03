@@ -15,6 +15,4 @@ __version__ = getVersion()
 __copyright__ = "Copyright The Contributors of IR2Vec"
 __license__ = "BSD 4-Clause License"
 
-print("__version__: ", __version__)
-
 setSeedEmbdPath(preparation.install_loc_pkg)
